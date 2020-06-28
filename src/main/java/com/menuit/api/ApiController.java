@@ -5,12 +5,14 @@ import com.menuit.api.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.repository.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController(value = "/api")
+@EnableMongoRepositories
 public class ApiController {
     @Autowired
     RestauranteRepository restauranteRepository;
@@ -21,8 +23,8 @@ public class ApiController {
     }
 
     @GetMapping("/restaurante/{nombre}")
-    public void getRestaurante(@PathVariable String nombre){
-        restauranteRepository.
+    public Restaurante getRestaurante(@PathVariable String nombre){
+        return restauranteRepository.findByNombre(nombre);
     }
 
     @GetMapping(value = "/restaurantes")

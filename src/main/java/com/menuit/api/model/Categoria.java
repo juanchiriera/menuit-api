@@ -1,7 +1,7 @@
 package com.menuit.api.model;
 
-import javax.persistence.*;
 import java.util.List;
+
 
 
 public class Categoria {

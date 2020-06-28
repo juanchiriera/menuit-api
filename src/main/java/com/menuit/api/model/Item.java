@@ -1,6 +1,5 @@
 package com.menuit.api.model;
 
-import javax.persistence.*;
 
 public class Item {
     private int id;
