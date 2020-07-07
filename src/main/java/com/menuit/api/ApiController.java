@@ -3,17 +3,18 @@ package com.menuit.api;
 import com.menuit.api.model.Restaurante;
 import com.menuit.api.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.data.repository.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController(value = "/api")
-@EnableMongoRepositories
 public class ApiController {
+
+    @Autowired
+    MongoTemplate mongoTemplate;
+
     @Autowired
     RestauranteRepository restauranteRepository;
 
