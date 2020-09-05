@@ -1,20 +1,39 @@
 package com.menuit.api.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
-
+@Document
 public class Categoria {
-    private int id;
+    @Id
+    private Long id;
     private String nombre;
-    private Carta carta;
+    @DBRef
     private List<Item> items;
+    @Transient
+    public static final String SEQUENCE_NAME = "categoria_sequence";
+    @Transient
+    private String restauranteId;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public String getRestauranteId() {
+        return restauranteId;
+    }
+
+    public void setRestauranteId(String restauranteId) {
+        this.restauranteId = restauranteId;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -26,14 +45,6 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public Carta getCarta() {
-        return carta;
-    }
-
-    public void setCarta(Carta carta) {
-        this.carta = carta;
-    }
-
     public List<Item> getItems() {
         return items;
     }
@@ -41,4 +52,11 @@ public class Categoria {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
+    public void addItem(Item item) {
+        if(this.items == null)
+            this.items = new ArrayList<>();
+        this.items.add(item);
+    }
+
 }

@@ -1,18 +1,35 @@
 package com.menuit.api.model;
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Item {
-    private int id;
+    @Id
+    private Long id;
     private String nombre;
     private String descripcion;
     private String precio;
-    private Categoria categoria;
+    @Transient
+    private String categoriaId;
+    @Transient
+    public static final String SEQUENCE_NAME = "item_sequence";
 
-    public int getId() {
+    public String getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(String categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,11 +57,4 @@ public class Item {
         this.precio = precio;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 }
